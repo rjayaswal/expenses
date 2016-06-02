@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="client.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="homeCtrl" class="container">
+        <h2>My Expense Page</h2>
+        <form role="form">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <label for="desc">Expense Descriptions</label>
+                    <input class="form-control" ng-model="item.desc" id="desc" type="text">
+                </div>
+                <div class="col-sm-2">
+                    <label for="amt">Amount</label>
+                    <input class="form-control" ng-model="item.amount" id="amt" type="text">
+                </div>
+                <div>
+                    <button id="add" type="button" ng-click=addExpense(item) class="add btn btn-success">Add Expense</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="container">
+            <h2>Expense Details</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Expense Descriptions</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{item.desc}}</td>
+                        <td>{{item.amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>
