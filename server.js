@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+var logged_user_email = 'gaurav@test.com';
+var logged_user_password = 'test123';
+
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 mongoose.connect('mongodb://guest:test123@ds045454.mlab.com:45454/user');
@@ -37,7 +40,7 @@ app.get('/', function(req, res) {
 
 app.get('/expenses', function(req, res) {
     Item.find({
-        'username': 'gaurav@test.com'
+        'username': logged_user_email
     }, function(err, rows) {
         // rowss is an array
         res.send(rows);
@@ -48,7 +51,12 @@ app.get('/expenses', function(req, res) {
 app.post('/home', function(req, res) {
     var email = req.body.email;
     var pwd = req.body.pwd;
+  if (email == logged_user_email && pwd == logged_user_password) {
+    console.log("login details:" + email + pwd);
     res.sendFile(__dirname + '/public/home.html');
+  }
+  else
+    res.send("Login Failed");
 
 });
 
@@ -77,6 +85,6 @@ app.post('/add', function(req, res) {
 });
 
 
-app.listen(3001, function() {
-    console.log('listening on port ' + 3000);
+app.listen(9000, function() {
+    console.log('listening on port ' + 9000);
 });
